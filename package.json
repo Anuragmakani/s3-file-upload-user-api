@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Anuragmakani/s3-file-upload-user-api#readme",
   "dependencies": {
-    "aws-sdk": "^2.1348.0",
+    "aws-sdk": "^2.1348.0"
+  },
+  "devDependencies": {
     "serverless-iam-roles-per-function": "^3.2.0"
   }
 }
