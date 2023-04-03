@@ -4,14 +4,35 @@ provider:
   runtime: nodejs18.x
   stage: dev
   region: ap-south-1
-
+  imRoleStatements:
 custom:
   fileUploadBucketName: ${self:custom.fileUploadBucketName}
 
+plugins:
+  - serverless-iam-roles-per-function
+
+functions:
+  s3FileUploader:
+    handler : src/upload.handler
+    name : s3-file-uploader
+    description : A lambda handler that upload a file to an s3 bucket 
+    timeout: 60 #seconds
+    memorySize: 128 #mb
+    events:
+      -http:
+        path: images
+        method : POST
+    iamRoleStatements:
+      - Effect : Allow 
+        Action : 
+          -"s3:Put*"
+        Resources: arn:aws:s3::: ${self:custom.fileUploadBucketName}/*
+      environment: 
+        FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileUploadBucketName}
 resources:
   Resources:
     fileBucket:
       Type : AWS::s3::Bucket
       Properties:
-        BucketName: ${self:custom.fileUploadBucketName}
+        BucketName: ${self:custom.fileUploadBucketName}/*
         AccessControl : PublicRead
