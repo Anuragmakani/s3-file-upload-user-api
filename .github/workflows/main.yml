@@ -13,13 +13,13 @@ jobs:
       matrix:
         node-version: [18.x]
     steps:
-    - name: install dependencies
-      run: npm install
     - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
+    - name: install dependencies
+      run: npm install    
     - name: serverless deploy
       run: serverless deploy
       # uses: serverless/github-action@master
