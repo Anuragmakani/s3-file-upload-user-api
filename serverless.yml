@@ -31,13 +31,13 @@ functions:
     environment:
       FILE_UPLOAD_BUCKET_NAME: ${self:custom.fileUploadBucketName}
 
-# resources:
-#   Resources:
-#     FileBucket:
-#       Type: AWS::S3::Bucket
-#       Properties:
-#         BucketName: ${self:custom.fileUploadBucketName}
-#         AccessControl: PublicRead
+resources:
+  Resources:
+    FileBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.fileUploadBucketName}
+        AccessControl: PublicRead
 
 # service: s3-file-uploader
 # provider:
